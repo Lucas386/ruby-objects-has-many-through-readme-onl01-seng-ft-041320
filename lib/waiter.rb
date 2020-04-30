@@ -1,20 +1,28 @@
-<<<<<<< HEAD
-=======
 class Waiter
+ 
+  attr_accessor :name, :yrs_experience
+ 
+  @@all = []
+ 
+  def initialize(name, yrs_experience)
+    @name = name
+    @yrs_experience = yrs_experience
+    @@all << self
+  end
+ 
+  def self.all
+    @@all
+  end
 
-  attr_accessor :name, :year_of_exp
-
-    @@all = Array.new
-
-    def initialize(name, year_of_exp)
-      @name = name
-      @year_of_exp = year_of_exp
-      @@all << self
+  def meals
+    Meal.all.select do |meal|
+      meal.waiter == self #checking for waiter now
     end
+  end
 
-    def self.all
-      @@all
+  def best_tipper
+    best_tipped_meal = meals.max do |meal_a, meal_b|
+      meal_a.tip <=> meal_b.tip
     end
-
+ 
 end
->>>>>>> d6b88df35033214509c6f8ca3bade8afdf065ebd
